@@ -1,82 +1,90 @@
-"use client"
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Work", path: "/work" },
-  { label: "Contact", path: "/contact" },
-];
+"use client";
+import { navLinks } from "@/constants/navlinks";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import RollingText from "../ui/rolling-text";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold tracking-tight">
-          <span className="text-primary">X</span>TRACT
+    <nav
+      className="fixed left-0 right-0 top-0 z-50 transition-all duration-300"
+      style={{
+        backgroundColor: scrolled ? "rgba(2,4,3,0.82)" : "rgba(2,4,3,0.2)",
+        backdropFilter: "blur(18px)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      {/* Desktop Navbar */}
+      <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_auto_1fr] items-center px-5 py-1 sm:px-7">
+        <Link
+          href="#hero"
+          className="inline-flex items-center gap-2 justify-self-start text-[1.1rem] font-extrabold tracking-normal text-white no-underline transition-opacity duration-200 hover:opacity-80"
+        >
+          <Image src="/logo.png" alt="" width={128} height={128} className="rounded-full" priority />
         </Link>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-14 justify-self-center md:flex">
           {navLinks.map((link) => (
             <Link
+              href={link.path}
               key={link.path}
-              to={link.path}
-              className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                location.pathname === link.path
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
+              className="group relative inline-flex text-sm font-semibold text-white/58 no-underline transition-colors duration-300 hover:text-white"
             >
-              {link.label}
+              <RollingText>{link.label}</RollingText>
             </Link>
           ))}
-          <Link
-            to="/contact"
-            className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            Get Started
-          </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setIsOpen(!isOpen)}
+        <Link
+          href="#contact"
+          className="group hidden justify-self-end rounded-lg bg-brand-accent px-3.5 py-1.5 text-sm font-semibold text-white no-underline transition-all duration-300 hover:shadow-[0_0_24px_color-mix(in_srgb,var(--brand-accent)_34%,transparent)] md:inline-flex"
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <RollingText>Get Started <ArrowUpRight className="w-4" /></RollingText>
+        </Link>
+
+        <button
+          className="col-start-3 flex items-center justify-center justify-self-end rounded-lg border border-white/10 bg-white/6 p-2 text-white md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+          type="button"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-background border-t border-border animate-fade-in">
-          <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
+        <div className="border-t border-white/8 bg-[#020403]/96 md:hidden animate-slide-down">
+          <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-5 py-6 sm:px-7">
             {navLinks.map((link) => (
               <Link
+                href={link.path}
                 key={link.path}
-                to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`text-lg font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.path
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
+                className="group inline-flex w-fit py-1 text-lg font-semibold text-white/72 no-underline transition-colors duration-300 hover:text-white"
               >
-                {link.label}
+                <RollingText>{link.label}</RollingText>
               </Link>
             ))}
             <Link
-              to="/contact"
+              href="#contact"
               onClick={() => setIsOpen(false)}
-              className="bg-primary text-primary-foreground px-5 py-3 rounded-lg text-sm font-semibold text-center hover:opacity-90 transition-opacity mt-2"
+              className="group mt-2 inline-flex justify-center rounded-lg bg-brand-accent px-5 py-3 text-center text-sm font-bold text-white no-underline transition-all duration-300 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--brand-accent)_35%,transparent)]"
             >
-              Get Started
+              <RollingText>Get Started</RollingText>
             </Link>
           </div>
         </div>
