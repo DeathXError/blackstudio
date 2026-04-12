@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link
               href={link.path}
               key={link.path}
-              className="group relative inline-flex text-sm font-semibold text-white/58 no-underline transition-colors duration-300 hover:text-white"
+              className="group relative inline-flex font-semibold text-white/72 no-underline transition-colors duration-300 hover:text-white"
             >
               <RollingText>{link.label}</RollingText>
             </Link>

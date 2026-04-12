@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/navbar";
 import Hero from "@/components/home/hero";
+import Footer from "@/components/layout/footer";
 
 const services = [
   {
@@ -149,7 +150,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-white/8 bg-white/[0.025] px-5 py-20 sm:px-7 lg:py-24">
+      <section className="border-y border-white/8 bg-white/2.5 px-5 py-20 sm:px-7 lg:py-24">
         <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <p className="text-sm font-bold uppercase text-brand-accent">
@@ -196,6 +197,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
