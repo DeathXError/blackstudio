@@ -2,6 +2,7 @@ import Link from "next/link";
 import Navbar from "@/components/layout/navbar";
 import Hero from "@/components/home/hero";
 import Footer from "@/components/layout/footer";
+import CTA from "@/components/home/cta";
 
 const services = [
   {
@@ -178,26 +179,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="px-5 py-20 sm:px-7 lg:py-24">
-        <div className="mx-auto max-w-[1180px] rounded-lg border border-brand-accent/24 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-accent)_16%,transparent),rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-8 sm:p-12 lg:p-14">
-          <p className="text-sm font-bold uppercase text-brand-accent">
-            Next launch
-          </p>
-          <div className="mt-5 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-            <h2 className="max-w-[780px] text-3xl font-extrabold leading-tight tracking-normal sm:text-5xl">
-              Bring the brief. Leave with the kind of digital presence people
-              remember.
-            </h2>
-            <Link
-              href="mailto:hello@xtract.studio"
-              className="w-fit rounded-lg bg-brand-accent px-6 py-3 text-sm font-bold text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--brand-accent)_34%,transparent)]"
-            >
-              hello@xtract.studio
-            </Link>
-          </div>
-        </div>
-      </section>
-
+      <CTA />
       <Footer />
     </main>
   );
