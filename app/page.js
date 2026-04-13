@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/navbar";
 import Hero from "@/components/home/hero";
 import Footer from "@/components/layout/footer";
 import CTA from "@/components/home/cta";
+import Faq from "@/components/home/faq";
 
 const services = [
   {
@@ -179,6 +180,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Faq />
       <CTA />
       <Footer />
     </main>
