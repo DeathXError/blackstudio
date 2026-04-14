@@ -1,85 +1,119 @@
-import { useEffect, useRef } from "react";
+"use client";
+import { memo, useEffect, useRef } from "react";
 
-export function ParticleCanvas() {
-    const canvasRef = useRef(null);
+/**
+ * Lightweight canvas particle background.
+ * Wrapped in React.memo so parent re-renders (e.g. word cycling in Hero)
+ * never cause this component to re-mount or re-draw from scratch.
+ */
+function ParticleCanvasInner() {
+  const canvasRef = useRef(null);
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-        const ctx = canvas.getContext("2d");
-        let animId;
-        let particles = [];
-        const PARTICLE_COUNT = 64;
+    const ctx = canvas.getContext("2d");
+    let animId;
+    let particles = [];
 
-        const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = Math.max(window.innerHeight * 0.9, 640);
-        };
+    // Fewer particles on smaller screens
+    const getCount = () => (window.innerWidth < 768 ? 0 : window.innerWidth < 1024 ? 28 : 48);
 
-        resize();
-        window.addEventListener("resize", resize);
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
 
-        particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.22,
-            vy: (Math.random() - 0.5) * 0.22,
-            r: Math.random() * 1.2 + 0.4,
-            opacity: Math.random() * 0.32 + 0.12,
-        }));
+    const createParticles = () => {
+      const count = getCount();
+      // Spawn particles well inside the canvas with padding from edges
+      const padX = canvas.width * 0.08;
+      const padY = canvas.height * 0.08;
+      particles = Array.from({ length: count }, () => ({
+        x: padX + Math.random() * (canvas.width - padX * 2),
+        y: padY + Math.random() * (canvas.height - padY * 2),
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: Math.random() * 1.2 + 0.4,
+        opacity: Math.random() * 0.28 + 0.1,
+      }));
+    };
 
-        const draw = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    resize();
+    createParticles();
 
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+    const onResize = () => {
+      resize();
+      createParticles();
+    };
+    window.addEventListener("resize", onResize);
 
-                    if (dist < 135) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.045 * (1 - dist / 135)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
+    // Throttle to ~30 fps
+    let last = 0;
+    const DIST_THRESHOLD = 130;
+    const DIST_SQ = DIST_THRESHOLD * DIST_THRESHOLD;
 
-            for (const p of particles) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-                ctx.fill();
+    const draw = (now) => {
+      animId = requestAnimationFrame(draw);
+      if (now - last < 33) return;
+      last = now;
 
-                p.x += p.vx;
-                p.y += p.vy;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
-            }
+      // Connection lines — batched into one path per frame
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < DIST_SQ) {
+            const alpha = 0.04 * (1 - Math.sqrt(distSq) / DIST_THRESHOLD);
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
 
-            animId = requestAnimationFrame(draw);
-        };
+      // Dots — move and bounce off edges with padding
+      const padX = 4;
+      const padY = 4;
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+        ctx.fill();
 
-        draw();
+        p.x += p.vx;
+        p.y += p.vy;
 
-        return () => {
-            cancelAnimationFrame(animId);
-            window.removeEventListener("resize", resize);
-        };
-    }, []);
+        // Bounce off edges instead of wrapping — prevents particles
+        // from appearing out of thin air at screen edges on mobile
+        if (p.x < padX || p.x > canvas.width - padX) p.vx *= -1;
+        if (p.y < padY || p.y > canvas.height - padY) p.vy *= -1;
+      }
+    };
 
-    return (
-        <canvas
-            ref={canvasRef}
-            className="absolute inset-0 z-1 h-full w-full pointer-events-none"
-            aria-hidden="true"
-        />
-    );
+    animId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 z-0 h-full w-full pointer-events-none"
+      aria-hidden="true"
+    />
+  );
 }
+
+// React.memo prevents re-render when Hero's state (activeWord) changes
+export const ParticleCanvas = memo(ParticleCanvasInner);

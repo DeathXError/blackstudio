@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${figtree.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body
+      <body suppressHydrationWarning
         className={`${figtree.className} min-h-full flex flex-col bg-[#020403] text-white font-sans`}
       >
         {children}

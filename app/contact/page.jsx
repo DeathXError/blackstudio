@@ -1,22 +1,8 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
-import { motion } from "framer-motion";
 import ContactCards from "./_components/contact-cards";
 import Form from "./_components/form";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0 },
-};
-
-const stagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
+import { StaggerContainer, FadeUp } from "./_components/motion-wrappers";
 
 export default function ContactPage() {
   return (
@@ -27,17 +13,8 @@ export default function ContactPage() {
         id="contact"
         className="px-5 pb-20 pt-36 sm:px-7 sm:pt-40 lg:pb-24"
       >
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-          className="mx-auto max-w-[1180px]"
-        >
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto max-w-[880px] text-center"
-          >
+        <StaggerContainer className="mx-auto max-w-[1180px]">
+          <FadeUp className="mx-auto max-w-[880px] text-center">
             <span className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-semibold text-white/72">
               Contact
             </span>
@@ -49,22 +26,19 @@ export default function ContactPage() {
               next website, edit, brand designs, or launch content with a clear
               path forward.
             </p>
-          </motion.div>
+          </FadeUp>
 
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 overflow-hidden rounded-lg border border-white/10 bg-[#050706]"
-          >
+          <FadeUp className="mt-8 overflow-hidden rounded-lg border border-white/10 bg-[#050706]">
             <div className="grid gap-0 lg:grid-cols-[1.3fr_0.7fr]">
               <Form />
               <ContactCards />
             </div>
-          </motion.div>
-        </motion.div>
+          </FadeUp>
+        </StaggerContainer>
       </section>
 
       <Footer />
     </main>
   );
 }
+

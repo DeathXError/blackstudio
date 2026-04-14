@@ -8,19 +8,12 @@ import Link from "next/link";
 
 export default function Hero() {
   const [activeWord, setActiveWord] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveWord((prev) => (prev + 1) % services.length);
     }, 2400);
-
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const t = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -31,13 +24,7 @@ export default function Hero() {
       <ParticleCanvas />
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center px-5 text-center"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? "translateY(0)" : "translateY(28px)",
-          transition:
-            "opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
+        className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center px-5 text-center animate-[fade-up-in_0.9s_cubic-bezier(0.16,1,0.3,1)_0.1s_both]"
       >
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral/20 bg-black/8 px-4 py-1.5 text-xs font-semibold uppercase text-neutral-300">
           <span className="h-2 w-2 rounded-full bg-brand-accent animate-dot-pulse" />
