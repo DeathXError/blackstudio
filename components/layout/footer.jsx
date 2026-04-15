@@ -29,7 +29,7 @@ const Footer = () => {
               />
             </Link>
 
-            <p className="mt-1 max-w-[580px] text-lg leading-9 text-white/80 sm:text-xl">
+            <p className="mt-1 max-w-[580px] text-md leading-9 text-white/80 sm:text-lg">
               Sharp edits, clean websites, brand systems, and launch content
               shaped for teams that want every touchpoint to feel intentional.
             </p>
@@ -42,7 +42,7 @@ const Footer = () => {
                   aria-label={label}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/[0.035] text-white/58 no-underline transition-colors duration-300 hover:border-white/24 hover:text-white focus-visible:border-white/24 focus-visible:text-white active:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.035] text-white/58 no-underline transition-colors duration-300 hover:border-white/24 hover:text-white focus-visible:border-white/24 focus-visible:text-white active:text-white"
                 >
                   <Icon className="h-6 w-6" />
                 </Link>
@@ -50,7 +50,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* EXPLORE */}
+          {/* EXPLORE & SERVICES */}
           <div className="grid gap-8 sm:grid-cols-2 lg:justify-items-end">
             <div>
               <h2 className="text-base font-bold uppercase tracking-normal text-white/95">
@@ -61,7 +61,7 @@ const Footer = () => {
                   <Link
                     key={link.path}
                     href={link.path}
-                    className="w-fit text-base font-semibold text-white/75 no-underline transition-colors duration-300 hover:text-white focus-visible:text-white active:text-white sm:text-lg"
+                    className="w-fit text-base font-medium text-white/75 no-underline transition-colors duration-300 hover:text-white focus-visible:text-white active:text-white sm:text-md"
                   >
                     {link.label}
                   </Link>
@@ -69,7 +69,6 @@ const Footer = () => {
               </nav>
             </div>
 
-            {/* SERVICES */}
             <div>
               <h2 className="text-base font-bold uppercase tracking-normal text-white/95">
                 Services
@@ -79,7 +78,7 @@ const Footer = () => {
                   <Link
                     key={link.label}
                     href={link.path}
-                    className="w-fit text-base font-semibold text-white/75 no-underline transition-colors duration-300 hover:text-white focus-visible:text-white active:text-white sm:text-lg"
+                    className="w-fit text-base font-medium text-white/75 no-underline transition-colors duration-300 hover:text-white focus-visible:text-white active:text-white sm:text-md"
                   >
                     {link.label}
                   </Link>

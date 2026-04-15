@@ -7,7 +7,7 @@ export default function CTA() {
       id="contact"
       className="border-y border-white/10 px-5 py-20 sm:px-7 lg:py-24"
     >
-      <div className="mx-auto max-w-[1180px]">
+      <div className="mx-auto max-w-[1100px]">
         <div className="relative mx-auto overflow-hidden rounded-lg border border-white/10 bg-[#080908] px-6 py-16 text-center sm:px-10 sm:py-20 lg:px-16">
           <div
             className="absolute left-0 top-0 h-24 w-24 rounded-br-full bg-neutral-400/14"

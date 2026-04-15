@@ -12,7 +12,7 @@ export default function Faq() {
       id="faqs"
       className="relative z-10 border-y border-white/8 bg-white/2.5 px-5 py-20 sm:px-7 lg:py-24"
     >
-      <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div className="mx-auto grid max-w-[1100px] gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
         <div className="lg:sticky lg:top-28">
           <p className="text-sm font-bold text-brand-accent">FAQs</p>
           <h2 className="mt-4 max-w-[520px] text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">

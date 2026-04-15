@@ -4,6 +4,7 @@ import Hero from "@/components/home/hero";
 import Footer from "@/components/layout/footer";
 import CTA from "@/components/home/cta";
 import Faq from "@/components/home/faq";
+import Testimonials from "@/components/home/testimonials";
 
 const services = [
   {
@@ -180,6 +181,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Testimonials />
       <Faq />
       <CTA />
       <Footer />
