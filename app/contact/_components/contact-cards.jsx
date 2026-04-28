@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 
-const email = "singh.vikas.junior@gmail.com";
+const email = "blackstudioo.production@gmail.com";
 const phoneNumber = "+91 8626008473";
 const phoneHref = "tel:+918626008473";
 const message = encodeURIComponent(

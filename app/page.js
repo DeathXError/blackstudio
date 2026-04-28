@@ -91,7 +91,7 @@ export default function Home() {
           {services.map((service, index) => (
             <article
               key={service.title}
-              className="min-h-[230px] rounded-lg border border-white/10 bg-white/[0.035] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/35 hover:bg-white/[0.055]"
+              className="min-h-[230px] rounded-lg border border-white/10 bg-white/[0.035] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/35 hover:bg-white/5.5"
             >
               <div className="mb-9 flex h-10 w-10 items-center justify-center rounded-lg border border-white/12 bg-black text-sm font-bold text-brand-accent">
                 0{index + 1}

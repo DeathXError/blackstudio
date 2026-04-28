@@ -18,7 +18,7 @@ function ParticleCanvasInner() {
     let particles = [];
 
     // Fewer particles on smaller screens
-    const getCount = () => (window.innerWidth < 768 ? 0 : window.innerWidth < 1024 ? 28 : 48);
+    const getCount = () => (window.innerWidth < 768 ? 16 : window.innerWidth < 1024 ? 28 : 48);
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
@@ -33,9 +33,9 @@ function ParticleCanvasInner() {
       particles = Array.from({ length: count }, () => ({
         x: padX + Math.random() * (canvas.width - padX * 2),
         y: padY + Math.random() * (canvas.height - padY * 2),
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
-        r: Math.random() * 1.2 + 0.4,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 1.8 + 0.6,
         opacity: Math.random() * 0.28 + 0.1,
       }));
     };

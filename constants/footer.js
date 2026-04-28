@@ -43,20 +43,31 @@ export const LinkedinIcon = ({ className = "" }) => (
     </svg>
 );
 
-const XIcon = ({ className = "" }) => (
+const GmailIcon = ({ className = "" }) => (
     <svg
         viewBox="0 0 24 24"
         fill="none"
         className={className}
         aria-hidden="true"
     >
-        <path
-            d="M7 6l10 12M17 6L7 18"
+        <rect
+            x="4.5"
+            y="7"
+            width="15"
+            height="11"
+            rx="3"
             stroke="currentColor"
+            strokeWidth="1.8"
+        />
+        <path
+            d="M6 8.5L12 13.5L18 8.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
             strokeLinecap="round"
-            strokeWidth="2"
+            strokeLinejoin="round"
         />
     </svg>
+
 );
 
 const YoutubeIcon = ({ className = "" }) => (
@@ -70,7 +81,7 @@ const YoutubeIcon = ({ className = "" }) => (
             x="4.5"
             y="7"
             width="15"
-            height="10"
+            height="11"
             rx="3"
             stroke="currentColor"
             strokeWidth="1.8"
@@ -82,22 +93,22 @@ const YoutubeIcon = ({ className = "" }) => (
 export const socialLinks = [
     {
         label: "Instagram",
-        href: "https://instagram.com",
+        href: "https://www.instagram.com/theblackstudioo?igsh=MWE4aWM0cXJqYzBibQ==",
         icon: InstagramIcon,
     },
     {
         label: "LinkedIn",
-        href: "https://linkedin.com",
+        href: "https://www.linkedin.com/in/black-studioo-432463406/",
         icon: LinkedinIcon,
     },
     {
-        label: "X",
-        href: "https://x.com",
-        icon: XIcon,
+        label: "Gmail",
+        href: "blackstudioo.production@gmail.com",
+        icon: GmailIcon,
     },
     {
         label: "YouTube",
-        href: "https://youtube.com",
+        href: "https://www.youtube.com/@ImChikas",
         icon: YoutubeIcon,
     },
 ];

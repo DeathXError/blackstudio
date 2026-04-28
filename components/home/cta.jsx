@@ -31,7 +31,7 @@ export default function CTA() {
             </p>
 
             <Link
-              href="mailto:hello@xtract.studio"
+              href="mailto:blackstudioo.production@gmail.com"
               className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-accent px-5 py-3 text-sm md:text-base font-bold text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/90"
             >
               <Mail className="h-4 w-4" />

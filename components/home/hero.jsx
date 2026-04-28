@@ -19,20 +19,18 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[88svh] overflow-hidden bg-[#020403] pt-28 pb-12 sm:pt-32 md:pb-16"
+      className="relative h-fit overflow-hidden pt-28 pb-12 sm:pt-32 md:pb-16"
     >
       <ParticleCanvas />
 
-      <div
-        className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center px-5 text-center animate-[fade-up-in_0.9s_cubic-bezier(0.16,1,0.3,1)_0.1s_both]"
-      >
+      <div className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center px-5 text-center animate-[fade-up-in_0.9s_cubic-bezier(0.16,1,0.3,1)_0.1s_both]">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral/20 bg-black/8 px-4 py-1.5 text-xs font-semibold uppercase text-neutral-300">
           <span className="h-2 w-2 rounded-full bg-brand-accent animate-dot-pulse" />
           Digital Creative Agency
         </div>
 
         <h1 className="max-w-[980px] text-4xl font-extrabold leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-7xl">
-          We craft exceptional
+          We Provide Services in
           <span className="relative mt-2 grid min-h-[1.12em] place-items-center overflow-hidden italic">
             {services.map((word, i) => (
               <span
@@ -57,8 +55,8 @@ export default function Hero() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="#contact"
-            className="group inline-flex items-center gap-2 rounded-lg bg-brand-accent px-6 py-3 text-sm font-bold text-white no-underline transition-all duration-300 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--brand-accent)_34%,transparent)]"
+            href="/contact"
+            className="group inline-flex items-center justify-center gap-2 rounded-lg bg-brand-accent px-6 py-3 w-full md:w-fit text-center text-sm font-bold text-white no-underline transition-all duration-300 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--brand-accent)_34%,transparent)]"
           >
             <RollingText>Start Your Project</RollingText>
             <svg
@@ -79,8 +77,8 @@ export default function Hero() {
             </svg>
           </Link>
           <Link
-            href="#work"
-            className="group inline-flex rounded-lg border border-white/12 bg-white/4 px-6 py-3 text-sm font-semibold text-white/74 no-underline transition-all duration-300 hover:border-white/30 hover:bg-white/8 hover:text-white"
+            href="/work"
+            className="group inline-flex justify-center items-center rounded-lg border border-white/12 bg-white/4 px-6 py-3 w-full md:w-fit text-center text-sm font-semibold text-white/74 no-underline transition-all duration-300 hover:border-white/30 hover:bg-white/8 hover:text-white"
           >
             <RollingText>View Our Work</RollingText>
           </Link>

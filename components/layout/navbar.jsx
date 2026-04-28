@@ -29,12 +29,19 @@ const Navbar = () => {
     >
       {/* Desktop Navbar */}
       <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_auto_1fr] items-center px-5 py-1 sm:px-7">
-        <Link
-          href="#hero"
+        <a
+          href="/#hero"
           className="inline-flex items-center gap-2 justify-self-start text-[1.1rem] font-extrabold tracking-normal text-white no-underline transition-opacity duration-200 hover:opacity-80"
         >
-          <Image src="/logo.png" alt="" width={128} height={128} className="rounded-full" priority />
-        </Link>
+          <Image
+            src="/logo.png"
+            alt="BlackStudio"
+            width={128}
+            height={128}
+            className="rounded-full"
+            priority
+          />
+        </a>
 
         <div className="hidden items-center gap-14 justify-self-center md:flex">
           {navLinks.map((link) => (
@@ -49,10 +56,12 @@ const Navbar = () => {
         </div>
 
         <Link
-          href="#contact"
+          href="/contact"
           className="group hidden justify-self-end rounded-lg bg-brand-accent px-3.5 py-1.5 text-sm font-semibold text-white no-underline transition-all duration-300 hover:shadow-[0_0_24px_color-mix(in_srgb,var(--brand-accent)_34%,transparent)] md:inline-flex"
         >
-          <RollingText>Get Started <ArrowUpRight className="w-4" /></RollingText>
+          <RollingText>
+            Get Started <ArrowUpRight className="w-4" />
+          </RollingText>
         </Link>
 
         <button
@@ -80,7 +89,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/contact"
               onClick={() => setIsOpen(false)}
               className="group mt-2 inline-flex justify-center rounded-lg bg-brand-accent px-5 py-3 text-center text-sm font-bold text-white no-underline transition-all duration-300 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--brand-accent)_35%,transparent)]"
             >
