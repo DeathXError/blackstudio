@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "BLACKSTUDIO | Digital Creative Agency",
+  title: "Blackstudio | Digital Creative Agency",
   description: "We craft exceptional digital experiences.",
 };
 

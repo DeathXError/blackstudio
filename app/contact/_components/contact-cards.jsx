@@ -49,7 +49,7 @@ export default function ContactCards() {
   return (
     <motion.div
       variants={stagger}
-      className="flex h-full flex-col gap-4 p-6 sm:p-8 lg:border-l lg:border-white/10"
+      className="flex h-full w-full min-w-0 flex-col gap-4 p-6 sm:p-8 lg:border-l lg:border-white/10"
     >
       {contactOptions.map(({ label, value, href, icon: Icon }) => (
         <motion.a
@@ -59,15 +59,15 @@ export default function ContactCards() {
           href={href}
           target={label === "WhatsApp" ? "_blank" : undefined}
           rel={label === "WhatsApp" ? "noreferrer" : undefined}
-          className="group rounded-lg border border-white/10 bg-white/[0.035] p-6 text-white no-underline transition-colors duration-300 hover:border-brand-accent/45 hover:bg-white/5.5"
+          className="group block w-full min-w-0 rounded-lg border border-white/10 bg-white/[0.035] p-6 text-white no-underline transition-colors duration-300 hover:border-brand-accent/45 hover:bg-white/5.5"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex min-w-0 items-center gap-4">
             <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-[#020403] text-white transition-colors duration-300 group-hover:border-brand-accent/50 group-hover:text-brand-accent">
               <Icon className="h-5 w-5" />
             </span>
-            <div>
+            <div className="min-w-0 flex-1">
               <h2 className="text-lg font-bold text-white">{label}</h2>
-              <p className="mt-1 text-base font-medium text-white/58">
+              <p className="mt-1 text-base font-medium text-white/58 wrap-anywhere">
                 {value}
               </p>
             </div>
