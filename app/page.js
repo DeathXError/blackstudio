@@ -5,6 +5,7 @@ import Footer from "@/components/layout/footer";
 import CTA from "@/components/home/cta";
 import Faq from "@/components/home/faq";
 import Testimonials from "@/components/home/testimonials";
+import Benefits from "@/components/home/benefits";
 
 const services = [
   {
@@ -181,6 +182,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Benefits />
       <Testimonials />
       <Faq />
       <CTA />
