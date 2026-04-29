@@ -29,9 +29,9 @@ const Navbar = () => {
     >
       {/* Desktop Navbar */}
       <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_auto_1fr] items-center px-5 py-1 sm:px-7">
-        <a
+        <Link
           href="/#hero"
-          className="inline-flex items-center gap-2 justify-self-start text-[1.1rem] font-extrabold tracking-normal text-white no-underline transition-opacity duration-200 hover:opacity-80"
+          className="inline-flex items-center gap-2 justify-self-start text-[1.1rem] font-bold tracking-normal text-white no-underline transition-opacity duration-200 hover:opacity-80"
         >
           <Image
             src="/logo.png"
@@ -41,7 +41,7 @@ const Navbar = () => {
             className="rounded-full"
             priority
           />
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-14 justify-self-center md:flex">
           {navLinks.map((link) => (

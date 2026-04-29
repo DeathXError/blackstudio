@@ -22,7 +22,7 @@ export default function CTA() {
             <p className="text-sm font-bold uppercase text-brand-accent">
               Next launch
             </p>
-            <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-normal sm:text-5xl">
+            <h2 className="mt-5 text-3xl font-bold leading-tight tracking-normal sm:text-5xl">
               Ready to make your next project feel sharper?
             </h2>
             <p className="mt-5 max-w-[620px] text-base leading-8 text-white/58 sm:text-lg">

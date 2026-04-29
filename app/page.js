@@ -78,7 +78,7 @@ export default function Home() {
             <p className="text-sm font-bold uppercase text-brand-accent">
               Built for momentum
             </p>
-            <h2 className="mt-4 max-w-[620px] text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">
+            <h2 className="mt-4 max-w-[620px] text-3xl font-bold leading-tight tracking-normal text-white sm:text-5xl">
               One creative partner for the work that moves your brand forward.
             </h2>
           </div>
@@ -115,7 +115,7 @@ export default function Home() {
               <p className="text-sm font-bold uppercase text-brand-accent">
                 Selected work
               </p>
-              <h2 className="mt-4 max-w-[680px] text-3xl font-extrabold leading-tight tracking-normal sm:text-5xl">
+              <h2 className="mt-4 max-w-[680px] text-3xl font-bold leading-tight tracking-normal sm:text-5xl">
                 Strong visuals, clean builds, and launch assets that feel alive.
               </h2>
             </div>
@@ -140,7 +140,7 @@ export default function Home() {
                   <p className="mb-3 text-sm font-bold uppercase text-brand-accent">
                     {item.label}
                   </p>
-                  <h3 className="text-3xl font-extrabold tracking-normal">
+                  <h3 className="text-3xl font-bold tracking-normal">
                     {item.title}
                   </h3>
                 </div>
@@ -160,7 +160,7 @@ export default function Home() {
             <p className="text-sm font-bold uppercase text-brand-accent">
               Clear process
             </p>
-            <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-normal sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold leading-tight tracking-normal sm:text-5xl">
               From raw idea to polished launch, without the drag.
             </h2>
           </div>

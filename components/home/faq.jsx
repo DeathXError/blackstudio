@@ -15,7 +15,7 @@ export default function Faq() {
       <div className="mx-auto grid max-w-[1100px] gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
         <div className="lg:sticky lg:top-28">
           <p className="text-sm font-bold text-brand-accent">FAQs</p>
-          <h2 className="mt-4 max-w-[520px] text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">
+          <h2 className="mt-4 max-w-[520px] text-3xl font-bold leading-tight tracking-normal text-white sm:text-5xl">
             We&apos;ve got the answers you&apos;re looking for.
           </h2>
           <p className="mt-5 max-w-[460px] text-base leading-8 text-white/58 sm:text-lg">

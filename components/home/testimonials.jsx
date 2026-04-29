@@ -10,7 +10,7 @@ export default function Testimonials() {
           <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-bold uppercase text-brand-accent">
             Testimonials
           </p>
-          <h2 className="mt-6 text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">
+          <h2 className="mt-6 text-3xl font-bold leading-tight tracking-normal text-white sm:text-5xl">
             Why Clients and Businesses Love Working With Us.
           </h2>
           <p className="mx-auto mt-5 max-w-[620px] text-base leading-8 text-white/58 sm:text-lg">

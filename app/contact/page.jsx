@@ -18,7 +18,7 @@ export default function ContactPage() {
             <span className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-semibold text-white/72">
               Contact
             </span>
-            <h1 className="mt-8 text-5xl font-extrabold leading-[1.02] tracking-normal text-white sm:text-7xl">
+            <h1 className="mt-8 max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">
               Get in Touch with Us
             </h1>
             <p className="mx-auto mt-6 max-w-[720px] text-lg leading-9 text-white/58 sm:text-xl">
@@ -41,4 +41,3 @@ export default function ContactPage() {
     </main>
   );
 }
-

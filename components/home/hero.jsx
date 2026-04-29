@@ -29,7 +29,7 @@ export default function Hero() {
           Digital Creative Agency
         </div>
 
-        <h1 className="max-w-[980px] text-4xl font-extrabold leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">
           We Provide Services in
           <span className="relative mt-2 grid min-h-[1.12em] place-items-center overflow-hidden italic">
             {services.map((word, i) => (
@@ -93,7 +93,7 @@ export default function Hero() {
               <div className="absolute inset-x-0 top-0 h-px bg-white/18" />
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="text-3xl font-extrabold tracking-normal text-white sm:text-4xl">
+                  <div className="text-3xl font-bold tracking-normal text-white sm:text-4xl">
                     {stat.value}
                   </div>
                   <div className="mt-2 text-xs font-semibold uppercase tracking-normal text-white/52">
