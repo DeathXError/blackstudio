@@ -22,14 +22,14 @@ export default function Form() {
     >
       <label className="block min-w-0 text-base font-semibold text-white">
         Your name
-        <input name="name" placeholder="Vikas Singh" className={inputClass} />
+        <input name="name" placeholder="John Smith" className={inputClass} />
       </label>
       <label className="block min-w-0 text-base font-semibold text-white">
         Email
         <input
           name="email"
           type="email"
-          placeholder="vikas@mail.com"
+          placeholder="john@mail.com"
           className={inputClass}
         />
       </label>

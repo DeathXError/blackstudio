@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 
 const email = "blackstudioo.production@gmail.com";
-const phoneNumber = "+91 8626008473";
-const phoneHref = "tel:+918626008473";
+const phoneNumber = "+91 1234567890";
+const phoneHref = "tel:+911234567890";
 const message = encodeURIComponent(
   "Hi BlackStudio! I'm interested in discussing a project.",
 );
-const whatsappHref = `https://wa.me/8626008473?text=${message}`;
+const whatsappHref = `https://wa.me/1234567890?text=${message}`;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },

@@ -4,9 +4,11 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import RollingText from "../ui/rolling-text";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -44,15 +46,22 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden items-center gap-14 justify-self-center md:flex">
-          {navLinks.map((link) => (
-            <Link
-              href={link.path}
-              key={link.path}
-              className="group relative inline-flex font-semibold text-white/72 no-underline transition-colors duration-300 hover:text-white"
-            >
-              <RollingText>{link.label}</RollingText>
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.path;
+            return (
+              <Link
+                href={link.path}
+                key={link.path}
+                className={`group relative inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-semibold no-underline transition-colors duration-300 hover:text-white ${
+                  isActive
+                    ? "border-white/8 bg-brand-accent/10 text-white transition-all duration-300 hover:bg-brand-accent/10"
+                    : "border-transparent text-white/72"
+                }`}
+              >
+                <RollingText>{link.label}</RollingText>
+              </Link>
+            );
+          })}
         </div>
 
         <Link
@@ -78,16 +87,23 @@ const Navbar = () => {
       {isOpen && (
         <div className="border-t border-white/8 bg-[#020403]/96 md:hidden animate-slide-down">
           <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-5 py-6 sm:px-7">
-            {navLinks.map((link) => (
-              <Link
-                href={link.path}
-                key={link.path}
-                onClick={() => setIsOpen(false)}
-                className="group inline-flex w-fit py-1 text-lg font-semibold text-white/72 no-underline transition-colors duration-300 hover:text-white"
-              >
-                <RollingText>{link.label}</RollingText>
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.path;
+              return (
+                <Link
+                  href={link.path}
+                  key={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`group relative inline-flex w-fit items-center justify-center rounded-lg border px-2.5 py-1.5 text-md font-semibold no-underline transition-colors duration-300 hover:text-white ${
+                    isActive
+                      ? "border-white/8 bg-blue-800/8 text-white"
+                      : "border-transparent text-white/72"
+                  }`}
+                >
+                  <RollingText>{link.label}</RollingText>
+                </Link>
+              );
+            })}
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
