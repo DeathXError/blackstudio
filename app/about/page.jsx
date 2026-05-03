@@ -75,7 +75,7 @@ export default function AboutPage() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto max-w-[860px] text-center"
           >
-            <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-bold uppercase text-brand-accent">
+            <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-bold uppercase text-brand-accent">
               About Us
             </p>
             <h1 className="mt-8 max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">

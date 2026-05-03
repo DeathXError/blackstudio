@@ -15,8 +15,8 @@ export default function ContactPage() {
       >
         <StaggerContainer className="mx-auto max-w-[1180px]">
           <FadeUp className="mx-auto max-w-[880px] text-center">
-            <span className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-semibold text-white/72">
-              Contact
+            <span className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-bold uppercase text-brand-accent">
+              Contact Us
             </span>
             <h1 className="mt-8 max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">
               Get in Touch with Us
