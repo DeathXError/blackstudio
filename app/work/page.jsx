@@ -7,12 +7,13 @@ import { memo, useCallback, useEffect, useRef, useState } from "react";
 const reelUrls = [
   "https://www.instagram.com/reels/DNPrcPROAtp/",
   "https://www.instagram.com/reels/DJBZ0BbIV7Z/",
-  "https://www.instagram.com/reels/DTSedfOCEBW/",
-  "https://www.instagram.com/reels/DTkDC-jCHAE/",
+  "https://www.instagram.com/reels/DOqItYGEtyO/",
   "https://www.instagram.com/reels/DFdG6n0I7Ql/",
   "https://www.instagram.com/reels/DU0L__bkvHh/",
   "https://www.instagram.com/reels/DXLm4FRiZEZ/",
   "https://www.instagram.com/reels/DNiVJyKB8Gc/",
+  "https://www.instagram.com/reels/DTSedfOCEBW/",
+  "https://www.instagram.com/reels/DTkDC-jCHAE/",
 ];
 
 const youtubeUrls = [
@@ -54,11 +55,11 @@ const youtubeVideos = youtubeUrls.map((url, index) => ({
 // Section Heading Component
 const SectionHeading = memo(function SectionHeading({ title, description }) {
   return (
-    <div className="px-2 max-w-[760px] text-start">
-      <h2 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">
+    <div className="px-2 mx-auto max-w-[760px] text-center">
+      <h2 className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl">
         {title}
       </h2>
-      <p className="mt-3 max-w-[620px] text-sm leading-7 text-white/46 sm:text-base sm:leading-8">
+      <p className="mt-3 mx-auto max-w-[620px] text-md leading-7 text-white/46 sm:text-base sm:leading-8">
         {description}
       </p>
     </div>
@@ -181,32 +182,16 @@ export default function WorkPage() {
       <div className="px-5 pb-24 pt-36 sm:px-7 sm:pt-40 lg:pb-28">
         {/* Hero Section */}
         <section className="mx-auto max-w-[820px] text-center">
-          <h1 className="text-4xl font-bold leading-[1.02] tracking-normal text-white sm:text-5xl lg:text-6xl">
-            Work
-          </h1>
-          <p className="mx-auto mt-6 max-w-[700px] text-base leading-8 text-white/58 sm:text-lg sm:leading-9">
-            A selection of short-form edits crafted for pace, clarity, and
-            stronger attention.
+          <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-bold uppercase text-brand-accent">
+            Featured work
           </p>
-        </section>
-
-        {/* Youtube Videos */}
-        <section className="mx-auto mt-24 max-w-[1180px]">
-          <SectionHeading
-            label="Section 02"
-            title="YouTube videos"
-            description="Longer edits with more room for story, structure, and measured pacing."
-          />
-
-          <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-10">
-            {youtubeVideos.map((video) => (
-              <YoutubeEmbed
-                key={video.embedUrl}
-                embedUrl={video.embedUrl}
-                title={video.title}
-              />
-            ))}
-          </div>
+          <h1 className="mt-6 max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">
+            Showcasing our best work
+          </h1>
+          <p className="mx-auto mt-6 max-w-[700px] text-lg leading-9 text-white/58 sm:text-xl">
+            A selection of short-form edits and other works that we are proud
+            of.
+          </p>
         </section>
 
         {/* Reels */}
@@ -229,6 +214,25 @@ export default function WorkPage() {
                   showSkeleton={showInstagramSkeleton}
                 />
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Youtube Videos */}
+        <section className="mx-auto mt-24 max-w-[1180px]">
+          <SectionHeading
+            label="Section 02"
+            title="YouTube videos"
+            description="Longer edits with more room for story, structure, and measured pacing."
+          />
+
+          <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-10">
+            {youtubeVideos.map((video) => (
+              <YoutubeEmbed
+                key={video.embedUrl}
+                embedUrl={video.embedUrl}
+                title={video.title}
+              />
             ))}
           </div>
         </section>
