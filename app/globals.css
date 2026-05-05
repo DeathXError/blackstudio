@@ -177,29 +177,54 @@
   }
 }
 
-/* Instagram embed height crop — hide likes/comments below "View more on Instagram" */
+/* Instagram embed — force black theme on all wrapper elements */
 .instagram-embed-container {
-  max-height: 480px !important;
+  max-height: 450px !important;
   overflow: hidden !important;
   position: relative;
   background: #000 !important;
+  color-scheme: dark;
 }
 
+/* Target the iframe element itself — crop white header with negative margin */
 .instagram-embed-container iframe {
-  max-height: 480px !important;
+  max-height: 450px !important;
   overflow: hidden !important;
+  background: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: -56px !important;
 }
 
+/* Target Instagram's blockquote before processing */
 .instagram-embed-container .instagram-media {
-  max-height: 480px !important;
+  max-height: 450px !important;
   overflow: hidden !important;
   background: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
+/* Target Instagram's rendered wrapper after processing */
 .instagram-embed-container .instagram-media-rendered {
-  max-height: 480px !important;
+  max-height: 450px !important;
   overflow: hidden !important;
   background: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Catch any div/span wrappers Instagram injects */
+.instagram-embed-container > div,
+.instagram-embed-container > span,
+.instagram-embed-container > section {
+  background: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 @layer base {

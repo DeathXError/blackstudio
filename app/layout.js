@@ -1,5 +1,12 @@
-import { Figtree, Geist_Mono } from "next/font/google";
+import { Figtree, Geist_Mono, Fredoka } from "next/font/google";
 import "./globals.css";
+
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+});
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -23,10 +30,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${figtree.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${fredoka.variable} ${figtree.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body suppressHydrationWarning
-        className={`${figtree.className} min-h-full flex flex-col bg-[#020403] text-white font-sans`}
+        className={`${fredoka.className} min-h-full flex flex-col bg-[#020403] text-white font-sans`}
       >
         {children}
       </body>

@@ -6,15 +6,15 @@ import Script from "next/script";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 const reelData = [
-  { url: "https://www.instagram.com/reels/DNPrcPROAtp/", reach: "214K", likes: "63.4K", comments: "1.8K" },
-  { url: "https://www.instagram.com/reels/DJBZ0BbIV7Z/", reach: "188K", likes: "60.9K", comments: "1.2K" },
-  { url: "https://www.instagram.com/reels/DOqItYGEtyO/", reach: "126K", likes: "18.7K", comments: "624" },
-  { url: "https://www.instagram.com/reels/DFdG6n0I7Ql/", reach: "98K", likes: "12.3K", comments: "482" },
-  { url: "https://www.instagram.com/reels/DU0L__bkvHh/", reach: "156K", likes: "42.1K", comments: "935" },
-  { url: "https://www.instagram.com/reels/DXLm4FRiZEZ/", reach: "73K", likes: "9.8K", comments: "312" },
-  { url: "https://www.instagram.com/reels/DNiVJyKB8Gc/", reach: "201K", likes: "55.6K", comments: "1.5K" },
-  { url: "https://www.instagram.com/reels/DTSedfOCEBW/", reach: "89K", likes: "14.2K", comments: "578" },
-  { url: "https://www.instagram.com/reels/DTkDC-jCHAE/", reach: "142K", likes: "38.5K", comments: "821" },
+  { url: "https://www.instagram.com/reels/DOqItYGEtyO/", reach: "26.6M", likes: "28.7K", comments: "1612" },
+  { url: "https://www.instagram.com/reels/DNPrcPROAtp/", reach: "2.3M", likes: "68.3K", comments: "514" },
+  { url: "https://www.instagram.com/reels/DJBZ0BbIV7Z/", reach: "1.7M", likes: "60.9K", comments: "676" },
+  { url: "https://www.instagram.com/reels/DTkDC-jCHAE/", reach: "1M", likes: "571", comments: "5" },
+  { url: "https://www.instagram.com/reels/DTSedfOCEBW/", reach: "314K", likes: "806", comments: "9" },
+  { url: "https://www.instagram.com/reels/DU0L__bkvHh/", reach: "156K", likes: "2795", comments: "302" },
+  { url: "https://www.instagram.com/reels/DXLm4FRiZEZ/", reach: "50K", likes: "483", comments: "5" },
+  { url: "https://www.instagram.com/reels/DFdG6n0I7Ql/", reach: "18k", likes: "432", comments: "22" },
+  { url: "https://www.instagram.com/reels/DNiVJyKB8Gc/", reach: "4k", likes: "63", comments: "5" },
 ];
 
 const youtubeUrls = [
@@ -69,7 +69,8 @@ const SectionHeading = memo(function SectionHeading({ title, description }) {
 });
 
 // Instagram Embed Component
-const INSTAGRAM_EMBED_MAX_HEIGHT = 750;
+const INSTAGRAM_EMBED_MAX_HEIGHT = 450;
+const INSTAGRAM_HEADER_CROP = 56; // px to crop from top (white header)
 
 const InstagramEmbed = memo(function InstagramEmbed({
   canonicalUrl,
@@ -91,12 +92,15 @@ const InstagramEmbed = memo(function InstagramEmbed({
     blockquote.dataset.instgrmVersion = "14";
     Object.assign(blockquote.style, {
       background: "#000",
-      margin: "0 auto",
+      margin: "0",
+      padding: "0",
       width: "100%",
       maxWidth: "100%",
       minWidth: "0",
       overflow: "hidden",
-      borderRadius: "6px",
+      borderRadius: "0",
+      border: "none",
+      boxShadow: "none",
     });
 
     const link = document.createElement("a");
@@ -106,18 +110,58 @@ const InstagramEmbed = memo(function InstagramEmbed({
     blockquote.appendChild(link);
     wrapper.appendChild(blockquote);
 
+    // Force black background and crop the white header
+    function forceBlackTheme() {
+      // Disconnect to avoid infinite loop (our style changes trigger mutations)
+      observer.disconnect();
+
+      wrapper.querySelectorAll("*").forEach((el) => {
+        // Force black bg and remove borders on all elements
+        el.style.setProperty("background-color", "#000", "important");
+        el.style.setProperty("border", "none", "important");
+        el.style.setProperty("box-shadow", "none", "important");
+
+        if (el.tagName === "IFRAME") {
+          // Shift iframe upward to crop the white header
+          el.style.setProperty(
+            "margin-top",
+            `-${INSTAGRAM_HEADER_CROP}px`,
+            "important"
+          );
+        } else {
+          el.style.setProperty("padding", "0", "important");
+          el.style.setProperty("margin", "0", "important");
+        }
+      });
+
+      // Reconnect observer
+      observer.observe(wrapper, { childList: true, subtree: true });
+    }
+
+    // Watch for Instagram's script to modify the DOM (childList only, not attributes)
+    const observer = new MutationObserver(() => {
+      forceBlackTheme();
+    });
+
+    observer.observe(wrapper, { childList: true, subtree: true });
+
     // Process the embed
     if (window.instgrm?.Embeds?.process) {
       window.instgrm.Embeds.process();
     }
+
+    return () => observer.disconnect();
   }, [embedUrl, canonicalUrl]);
 
   return (
     <div className="w-full max-w-[420px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
-      {/* Embed area — clipped */}
+      {/* Embed area — clipped, min-height ensures skeleton is visible before iframe loads */}
       <div
         className="instagram-embed-container relative overflow-hidden rounded-t-xl bg-black"
-        style={{ maxHeight: `${INSTAGRAM_EMBED_MAX_HEIGHT}px` }}
+        style={{
+          maxHeight: `${INSTAGRAM_EMBED_MAX_HEIGHT}px`,
+          minHeight: `${INSTAGRAM_EMBED_MAX_HEIGHT}px`,
+        }}
       >
         {/* Skeleton overlay — managed by React, safe to toggle */}
         {showSkeleton && (
@@ -148,54 +192,32 @@ const InstagramEmbed = memo(function InstagramEmbed({
       {stats && (
         <div className="grid grid-cols-3 items-center justify-items-center gap-3 border-t border-white/10 bg-[#0a0d0c] px-4 py-4">
           <div>
-          <div className="flex items-center gap-2">
-                <Eye className="h-4 w-4 text-brand-accent" />
-                <span className="text-sm font-bold text-brand-accent">{stats.reach}</span>
-              </div>
-              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-                Reach
-              </p>
+            <div className="flex items-center gap-2">
+              <Eye className="h-4 w-4 text-brand-accent" />
+              <span className="text-sm font-bold text-brand-accent">{stats.reach}</span>
+            </div>
+            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+              Reach
+            </p>
           </div>
-          {/* <div className="flex items-center gap-1.5 h-full border-r border-white/8 px-2 py-1">
-            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-            <span className="text-sm font-semibold text-brand-accent">{stats.reach}</span>
-            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Reach</span>
-          </div>
-          <div className="flex items-center gap-1.5 border border-white/18 rounded-full px-2 py-1">
-            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            <span className="text-sm font-semibold text-brand-accent">{stats.likes}</span>
-            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Likes</span>
-          </div>
-          <div className="flex items-center gap-1.5 border border-white/18 rounded-full px-2 py-1">
-            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            <span className="text-sm font-semibold text-brand-accent">{stats.comments}</span>
-            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Comments</span>
-          </div> */}
           <div>
-              <div className="flex items-center gap-2">
-                <Heart className="h-4 w-4 text-brand-accent" />
-                <span className="text-sm font-bold text-brand-accent">{stats.likes}</span>
-              </div>
-              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-                Likes
-              </p>
+            <div className="flex items-center gap-2">
+              <Heart className="h-4 w-4 text-brand-accent" />
+              <span className="text-sm font-bold text-brand-accent">{stats.likes}</span>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <MessageCircle className="h-4 w-4 text-brand-accent" />
-                <span className="text-sm font-bold text-brand-accent">{stats.comments}</span>
-              </div>
-              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-                Comments
-              </p>
+            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+              Likes
+            </p>
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <MessageCircle className="h-4 w-4 text-brand-accent" />
+              <span className="text-sm font-bold text-brand-accent">{stats.comments}</span>
             </div>
+            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+              Comments
+            </p>
+          </div>
         </div>
       )}
     </div>
