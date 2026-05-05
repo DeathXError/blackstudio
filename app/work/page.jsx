@@ -1,19 +1,20 @@
 "use client";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
+import { Eye, Heart, MessageCircle } from "lucide-react";
 import Script from "next/script";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 
-const reelUrls = [
-  "https://www.instagram.com/reels/DNPrcPROAtp/",
-  "https://www.instagram.com/reels/DJBZ0BbIV7Z/",
-  "https://www.instagram.com/reels/DOqItYGEtyO/",
-  "https://www.instagram.com/reels/DFdG6n0I7Ql/",
-  "https://www.instagram.com/reels/DU0L__bkvHh/",
-  "https://www.instagram.com/reels/DXLm4FRiZEZ/",
-  "https://www.instagram.com/reels/DNiVJyKB8Gc/",
-  "https://www.instagram.com/reels/DTSedfOCEBW/",
-  "https://www.instagram.com/reels/DTkDC-jCHAE/",
+const reelData = [
+  { url: "https://www.instagram.com/reels/DNPrcPROAtp/", reach: "214K", likes: "63.4K", comments: "1.8K" },
+  { url: "https://www.instagram.com/reels/DJBZ0BbIV7Z/", reach: "188K", likes: "60.9K", comments: "1.2K" },
+  { url: "https://www.instagram.com/reels/DOqItYGEtyO/", reach: "126K", likes: "18.7K", comments: "624" },
+  { url: "https://www.instagram.com/reels/DFdG6n0I7Ql/", reach: "98K", likes: "12.3K", comments: "482" },
+  { url: "https://www.instagram.com/reels/DU0L__bkvHh/", reach: "156K", likes: "42.1K", comments: "935" },
+  { url: "https://www.instagram.com/reels/DXLm4FRiZEZ/", reach: "73K", likes: "9.8K", comments: "312" },
+  { url: "https://www.instagram.com/reels/DNiVJyKB8Gc/", reach: "201K", likes: "55.6K", comments: "1.5K" },
+  { url: "https://www.instagram.com/reels/DTSedfOCEBW/", reach: "89K", likes: "14.2K", comments: "578" },
+  { url: "https://www.instagram.com/reels/DTkDC-jCHAE/", reach: "142K", likes: "38.5K", comments: "821" },
 ];
 
 const youtubeUrls = [
@@ -38,12 +39,13 @@ function getYoutubeEmbedUrl(url) {
   return `https://www.youtube.com/embed/${videoId}?rel=0`;
 }
 
-const reels = reelUrls.map((url) => {
+const reels = reelData.map(({ url, reach, likes, comments }) => {
   const canonicalUrl = normalizeInstagramUrl(url);
 
   return {
     canonicalUrl,
     embedUrl: `${canonicalUrl}?utm_source=ig_embed&utm_campaign=loading`,
+    stats: { reach, likes, comments },
   };
 });
 
@@ -67,16 +69,59 @@ const SectionHeading = memo(function SectionHeading({ title, description }) {
 });
 
 // Instagram Embed Component
+const INSTAGRAM_EMBED_MAX_HEIGHT = 750;
+
 const InstagramEmbed = memo(function InstagramEmbed({
   canonicalUrl,
   embedUrl,
   showSkeleton,
+  stats,
 }) {
+  const embedRef = useRef(null);
+
+  // Inject the blockquote into a ref-only div so React never manages it.
+  // Instagram's script can freely replace/modify it without conflicting with React.
+  useEffect(() => {
+    const wrapper = embedRef.current;
+    if (!wrapper || wrapper.childElementCount > 0) return;
+
+    const blockquote = document.createElement("blockquote");
+    blockquote.className = "instagram-media";
+    blockquote.dataset.instgrmPermalink = embedUrl;
+    blockquote.dataset.instgrmVersion = "14";
+    Object.assign(blockquote.style, {
+      background: "#000",
+      margin: "0 auto",
+      width: "100%",
+      maxWidth: "100%",
+      minWidth: "0",
+      overflow: "hidden",
+      borderRadius: "6px",
+    });
+
+    const link = document.createElement("a");
+    link.href = canonicalUrl;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    blockquote.appendChild(link);
+    wrapper.appendChild(blockquote);
+
+    // Process the embed
+    if (window.instgrm?.Embeds?.process) {
+      window.instgrm.Embeds.process();
+    }
+  }, [embedUrl, canonicalUrl]);
+
   return (
-    <div className="w-full max-w-[420px] rounded-lg border border-white/10 bg-white/3 p-3 transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/4.5 sm:p-4">
-      <div className="relative overflow-visible rounded-md bg-[#0a0d0c] sm:min-h-[620px]">
+    <div className="w-full max-w-[420px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
+      {/* Embed area — clipped */}
+      <div
+        className="instagram-embed-container relative overflow-hidden rounded-t-xl bg-black"
+        style={{ maxHeight: `${INSTAGRAM_EMBED_MAX_HEIGHT}px` }}
+      >
+        {/* Skeleton overlay — managed by React, safe to toggle */}
         {showSkeleton && (
-          <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between bg-[#0a0d0c] p-5 transition-opacity duration-300">
+          <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between bg-black p-5 transition-opacity duration-300">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 animate-pulse rounded-full bg-white/8" />
               <div className="space-y-2">
@@ -95,22 +140,68 @@ const InstagramEmbed = memo(function InstagramEmbed({
             </div>
           </div>
         )}
-        <blockquote
-          className="instagram-media m-0! w-full min-w-0 max-w-full overflow-hidden rounded-md"
-          data-instgrm-permalink={embedUrl}
-          data-instgrm-version="14"
-          style={{
-            background: "#0a0d0c",
-            margin: "0 auto",
-            width: "100%",
-          }}
-        >
-          <a href={canonicalUrl} target="_blank" rel="noreferrer" />
-        </blockquote>
+        {/* Embed target — React does NOT manage children, Instagram script does */}
+        <div ref={embedRef} />
       </div>
+
+      {/* Stats bar */}
+      {stats && (
+        <div className="grid grid-cols-3 items-center justify-items-center gap-3 border-t border-white/10 bg-[#0a0d0c] px-4 py-4">
+          <div>
+          <div className="flex items-center gap-2">
+                <Eye className="h-4 w-4 text-brand-accent" />
+                <span className="text-sm font-bold text-brand-accent">{stats.reach}</span>
+              </div>
+              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+                Reach
+              </p>
+          </div>
+          {/* <div className="flex items-center gap-1.5 h-full border-r border-white/8 px-2 py-1">
+            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span className="text-sm font-semibold text-brand-accent">{stats.reach}</span>
+            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Reach</span>
+          </div>
+          <div className="flex items-center gap-1.5 border border-white/18 rounded-full px-2 py-1">
+            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            <span className="text-sm font-semibold text-brand-accent">{stats.likes}</span>
+            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Likes</span>
+          </div>
+          <div className="flex items-center gap-1.5 border border-white/18 rounded-full px-2 py-1">
+            <svg className="h-3.5 w-3.5 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span className="text-sm font-semibold text-brand-accent">{stats.comments}</span>
+            <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider text-white/35">Comments</span>
+          </div> */}
+          <div>
+              <div className="flex items-center gap-2">
+                <Heart className="h-4 w-4 text-brand-accent" />
+                <span className="text-sm font-bold text-brand-accent">{stats.likes}</span>
+              </div>
+              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+                Likes
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <MessageCircle className="h-4 w-4 text-brand-accent" />
+                <span className="text-sm font-bold text-brand-accent">{stats.comments}</span>
+              </div>
+              <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
+                Comments
+              </p>
+            </div>
+        </div>
+      )}
     </div>
   );
 });
+
 
 // Youtube Embed Component
 const YoutubeEmbed = memo(function YoutubeEmbed({ embedUrl, title }) {
@@ -212,6 +303,7 @@ export default function WorkPage() {
                   canonicalUrl={reel.canonicalUrl}
                   embedUrl={reel.embedUrl}
                   showSkeleton={showInstagramSkeleton}
+                  stats={reel.stats}
                 />
               </div>
             ))}

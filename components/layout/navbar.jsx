@@ -54,7 +54,7 @@ const Navbar = () => {
                 key={link.path}
                 className={`group relative inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-semibold no-underline transition-colors duration-300 hover:text-white ${
                   isActive
-                    ? "border-white/8 bg-brand-accent/10 text-white transition-all duration-300 hover:bg-brand-accent/10"
+                    ? "border-white/8 text-white transition-all duration-300 bg-white/[0.035] hover:bg-brand-accent/10"
                     : "border-transparent text-white/72"
                 }`}
               >

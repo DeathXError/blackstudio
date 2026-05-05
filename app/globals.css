@@ -177,6 +177,31 @@
   }
 }
 
+/* Instagram embed height crop — hide likes/comments below "View more on Instagram" */
+.instagram-embed-container {
+  max-height: 480px !important;
+  overflow: hidden !important;
+  position: relative;
+  background: #000 !important;
+}
+
+.instagram-embed-container iframe {
+  max-height: 480px !important;
+  overflow: hidden !important;
+}
+
+.instagram-embed-container .instagram-media {
+  max-height: 480px !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+.instagram-embed-container .instagram-media-rendered {
+  max-height: 480px !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
