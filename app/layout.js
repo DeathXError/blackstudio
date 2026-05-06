@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       className={`${fredoka.variable} ${figtree.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body suppressHydrationWarning
-        className={`${fredoka.className} min-h-full flex flex-col bg-[#020403] text-white font-sans`}
+        className={`${figtree.variable} min-h-full flex flex-col bg-[#020403] text-white font-sans`}
       >
         {children}
       </body>

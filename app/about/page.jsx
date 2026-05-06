@@ -3,8 +3,10 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { ArrowRight, Check, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { animate, motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import WhatWeDo from "./_component/what-we-do";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -22,24 +24,50 @@ const stagger = {
 
 const stats = [
   {
-    value: "500+",
+    value: 500,
+    suffix: "+",
     label: "Projects delivered",
-    description:
-      "Launch assets, websites, and edits handled across fast-moving brand work.",
   },
   {
-    value: "50+",
+    value: 50,
+    suffix: "+",
     label: "Happy clients",
-    description:
-      "Creators, founders, and growing teams that needed sharper digital work.",
   },
   {
-    value: "4+",
+    value: 4,
+    suffix: "+",
     label: "Years experience",
-    description:
-      "Built through real launch cycles, revisions, deadlines, and delivery pressure.",
   },
 ];
+
+function CountNumber({ value, suffix = "" }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) {
+      return undefined;
+    }
+
+    const controls = animate(0, value, {
+      duration: 1.1,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate(latest) {
+        setDisplayValue(Math.round(latest));
+      },
+    });
+
+    return () => controls.stop();
+  }, [isInView, value]);
+
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+}
 
 const whyUsLeft = [
   "Disconnected freelancers and uneven creative quality",
@@ -73,75 +101,45 @@ export default function AboutPage() {
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto max-w-[860px] text-center"
+            className="mx-auto max-w-[840px] text-center"
           >
             <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-bold uppercase text-brand-accent">
               About Us
             </p>
             <h1 className="mt-8 max-w-[980px] font-bold leading-[1.04] tracking-normal text-white text-4xl md:text-5xl lg:text-6xl">
-                We help businesses with creative brands, websites, and content systems.
+              We shape digital experiences that help <span className="text-brand-accent">brands grow.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-[720px] text-lg leading-9 text-white/58 sm:text-xl">
               Blackstudio brings editing, web development, design, and content
-              into one sharper process so brands move faster without feeling
-              fragmented.
+              into one sharper process so brands move faster, and create work
+              that stands out
             </p>
           </motion.div>
 
           <motion.div
             variants={stagger}
-            className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="mx-auto mt-12 grid max-w-[860px] gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             {stats.map((stat, index) => (
               <motion.article
                 key={stat.label}
                 variants={fadeUp}
                 transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-lg border border-white/10 bg-white/3 p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/4.5 sm:p-8"
+                className="rounded-lg border border-white/10 bg-white/3 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/4.5"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-3xl font-bold leading-none text-white">
-                      {stat.value}
-                    </div>
-                    <div className="mt-4 text-sm font-semibold uppercase tracking-normal text-white/54">
-                      {stat.label}
-                    </div>
-                  </div>
-                  <span className="text-sm font-semibold text-white/24">
-                    0{index + 1}
-                  </span>
+                <div className="mt-2 text-3xl font-bold leading-none text-white sm:text-4xl">
+                  <CountNumber value={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="mt-6 h-px w-full bg-white/10" />
-                <p className="mt-5 text-sm leading-7 text-white/46 sm:text-base">
-                  {stat.description}
+                <p className="mt-3 text-sm font-semibold uppercase tracking-[0.08em] text-white/46 sm:text-sm">
+                  {stat.label}
                 </p>
               </motion.article>
             ))}
           </motion.div>
         </section>
 
-        {/* Who we are */}
-        <section className="py-20 lg:py-24 mx-auto mt-20 max-w-[1180px]">
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto max-w-[820px] text-center"
-          >
-            <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-bold uppercase text-brand-accent">
-              Who We Are
-            </p>
-            <h2 className="mt-6 text-4xl font-bold leading-tight tracking-normal sm:text-5xl">
-              We are a digital creative partner for teams that want clearer,
-              faster launch work.
-            </h2>
-            <p className="mx-auto mt-6 max-w-[760px] text-lg leading-9 text-white/58">
-              We are not built around bloated handoffs or overcomplicated
-              process. The goal is simple: make the work feel stronger, more
-              connected, and easier to ship.
-            </p>
-          </motion.div>
-        </section>
+        {/* What we do */}
+        <WhatWeDo />
 
         {/* Why us */}
         <section className="pb-20 lg:pb-24 mx-auto mt-20 max-w-[1180px]">
@@ -220,8 +218,8 @@ export default function AboutPage() {
               Ready to bring clarity and impact to your next project?
             </h2>
             <p className="mx-auto mt-5 max-w-[700px] text-base leading-8 text-white/58 sm:text-lg">
-              Send over the brief, the timeline, or even a rough idea. We
-              help shape it into work that feels intentional and ready for launch.
+              Send over the brief, the timeline, or even a rough idea. We help
+              shape it into work that feels intentional and ready for launch.
             </p>
             <Link
               href="/contact"

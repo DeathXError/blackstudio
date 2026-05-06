@@ -35,7 +35,7 @@ export default function Hero() {
             {services.map((word, i) => (
               <span
                 key={word}
-                className="absolute inset-0 flex items-center justify-center transition-all duration-500 [text-shadow:0_0_38px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
+                className="absolute inset-0 flex items-center justify-center transition-all duration-500 text-brand-accent [text-shadow:0_0_38px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
                 style={{
                   opacity: i === activeWord ? 1 : 0,
                   transform:
