@@ -186,14 +186,16 @@
   color-scheme: dark;
 }
 
-/* Target the iframe element itself — crop white header with negative margin */
+/* Target the iframe — crop white header + zoom to fill black bars */
 .instagram-embed-container iframe {
   max-height: 450px !important;
   overflow: hidden !important;
   background: #000 !important;
   border: none !important;
   box-shadow: none !important;
-  margin-top: -56px !important;
+  margin-top: -66px !important; /* 56px header × 1.18 scale */
+  transform: scale(1.18) !important;
+  transform-origin: top center !important;
 }
 
 /* Target Instagram's blockquote before processing */

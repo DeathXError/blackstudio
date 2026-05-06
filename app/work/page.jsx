@@ -4,17 +4,63 @@ import Navbar from "@/components/layout/navbar";
 import { Eye, Heart, MessageCircle } from "lucide-react";
 import Script from "next/script";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
+import WebProjects from "./_components/web-projects";
 
 const reelData = [
-  { url: "https://www.instagram.com/reels/DOqItYGEtyO/", reach: "26.6M", likes: "28.7K", comments: "1612" },
-  { url: "https://www.instagram.com/reels/DNPrcPROAtp/", reach: "2.3M", likes: "68.3K", comments: "514" },
-  { url: "https://www.instagram.com/reels/DJBZ0BbIV7Z/", reach: "1.7M", likes: "60.9K", comments: "676" },
-  { url: "https://www.instagram.com/reels/DTkDC-jCHAE/", reach: "1M", likes: "571", comments: "5" },
-  { url: "https://www.instagram.com/reels/DTSedfOCEBW/", reach: "314K", likes: "806", comments: "9" },
-  { url: "https://www.instagram.com/reels/DU0L__bkvHh/", reach: "156K", likes: "2795", comments: "302" },
-  { url: "https://www.instagram.com/reels/DXLm4FRiZEZ/", reach: "50K", likes: "483", comments: "5" },
-  { url: "https://www.instagram.com/reels/DFdG6n0I7Ql/", reach: "18k", likes: "432", comments: "22" },
-  { url: "https://www.instagram.com/reels/DNiVJyKB8Gc/", reach: "4k", likes: "63", comments: "5" },
+  {
+    url: "https://www.instagram.com/reels/DOqItYGEtyO/",
+    reach: "26.6M",
+    likes: "28.7K",
+    comments: "1612",
+  },
+  {
+    url: "https://www.instagram.com/reels/DNPrcPROAtp/",
+    reach: "2.3M",
+    likes: "68.3K",
+    comments: "514",
+  },
+  {
+    url: "https://www.instagram.com/reels/DJBZ0BbIV7Z/",
+    reach: "1.7M",
+    likes: "60.9K",
+    comments: "676",
+  },
+  {
+    url: "https://www.instagram.com/reels/DTkDC-jCHAE/",
+    reach: "1M",
+    likes: "571",
+    comments: "5",
+  },
+  {
+    url: "https://www.instagram.com/reels/DTSedfOCEBW/",
+    reach: "314K",
+    likes: "806",
+    comments: "9",
+  },
+  {
+    url: "https://www.instagram.com/reels/DU0L__bkvHh/",
+    reach: "156K",
+    likes: "2795",
+    comments: "302",
+  },
+  {
+    url: "https://www.instagram.com/reels/DXLm4FRiZEZ/",
+    reach: "50K",
+    likes: "483",
+    comments: "5",
+  },
+  {
+    url: "https://www.instagram.com/reels/DFdG6n0I7Ql/",
+    reach: "18k",
+    likes: "432",
+    comments: "22",
+  },
+  {
+    url: "https://www.instagram.com/reels/DNiVJyKB8Gc/",
+    reach: "4k",
+    likes: "63",
+    comments: "5",
+  },
 ];
 
 const youtubeUrls = [
@@ -71,6 +117,7 @@ const SectionHeading = memo(function SectionHeading({ title, description }) {
 // Instagram Embed Component
 const INSTAGRAM_EMBED_MAX_HEIGHT = 450;
 const INSTAGRAM_HEADER_CROP = 56; // px to crop from top (white header)
+const INSTAGRAM_ZOOM_SCALE = 1.18; // zoom to fill black bars around video
 
 const InstagramEmbed = memo(function InstagramEmbed({
   canonicalUrl,
@@ -125,9 +172,16 @@ const InstagramEmbed = memo(function InstagramEmbed({
           // Shift iframe upward to crop the white header
           el.style.setProperty(
             "margin-top",
-            `-${INSTAGRAM_HEADER_CROP}px`,
-            "important"
+            `-${INSTAGRAM_HEADER_CROP * INSTAGRAM_ZOOM_SCALE}px`,
+            "important",
           );
+          // Zoom to fill the black padding bars around the video
+          el.style.setProperty(
+            "transform",
+            `scale(${INSTAGRAM_ZOOM_SCALE})`,
+            "important",
+          );
+          el.style.setProperty("transform-origin", "top center", "important");
         } else {
           el.style.setProperty("padding", "0", "important");
           el.style.setProperty("margin", "0", "important");
@@ -154,7 +208,7 @@ const InstagramEmbed = memo(function InstagramEmbed({
   }, [embedUrl, canonicalUrl]);
 
   return (
-    <div className="w-full max-w-[420px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
+    <div className="group w-full max-w-[420px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
       {/* Embed area — clipped, min-height ensures skeleton is visible before iframe loads */}
       <div
         className="instagram-embed-container relative overflow-hidden rounded-t-xl bg-black"
@@ -190,40 +244,55 @@ const InstagramEmbed = memo(function InstagramEmbed({
 
       {/* Stats bar */}
       {stats && (
-        <div className="grid grid-cols-3 items-center justify-items-center gap-3 border-t border-white/10 bg-[#0a0d0c] px-4 py-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <Eye className="h-4 w-4 text-brand-accent" />
-              <span className="text-sm font-bold text-brand-accent">{stats.reach}</span>
+        <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0))] px-3 pb-3 pt-3">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="rounded-lg border border-white/8 bg-blue-500/10 px-3 py-1 transition-all duration-300 group-hover:border-blue-500/12 group-hover:bg-blue-500/12">
+              <div className="flex items-center gap-2 text-white/72">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
+                  <Eye className="h-3.5 w-3.5" />
+                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">
+                  Reach
+                </p>
+              </div>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.reach}
+              </p>
             </div>
-            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-              Reach
-            </p>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-brand-accent" />
-              <span className="text-sm font-bold text-brand-accent">{stats.likes}</span>
+
+            <div className="rounded-lg border border-white/8 bg-white/3 px-3 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
+              <div className="flex items-center gap-2 text-white/72">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
+                  <Heart className="h-3.5 w-3.5" />
+                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">
+                  Likes
+                </p>
+              </div>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.likes}
+              </p>
             </div>
-            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-              Likes
-            </p>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <MessageCircle className="h-4 w-4 text-brand-accent" />
-              <span className="text-sm font-bold text-brand-accent">{stats.comments}</span>
+
+            <div className="rounded-lg border border-white/8 bg-white/3 px-3 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
+              <div className="flex items-center gap-2 text-white/72">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
+                  <MessageCircle className="h-3.5 w-3.5" />
+                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">
+                  Comments
+                </p>
+              </div>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.comments}
+              </p>
             </div>
-            <p className="mt-1 text-xs uppercase tracking-normal text-white/38">
-              Comments
-            </p>
           </div>
         </div>
       )}
     </div>
   );
 });
-
 
 // Youtube Embed Component
 const YoutubeEmbed = memo(function YoutubeEmbed({ embedUrl, title }) {
@@ -350,8 +419,10 @@ export default function WorkPage() {
             ))}
           </div>
         </section>
-      </div>
 
+        {/* Web Projects */}
+        <WebProjects />
+      </div>
       <Footer />
     </main>
   );
