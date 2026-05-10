@@ -11,7 +11,10 @@ import Services from "@/components/home/services";
 export const metadata = {
   title: "Blackstudio | Digital Creative Agency",
   description:
-    "Video editing, web development, graphic design, and content creation for sharper brand launches.",
+    "Blackstudio creates video edits, websites, design systems, and content that help brands launch with more clarity and momentum.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home() {

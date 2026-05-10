@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const row1 = [
@@ -56,10 +57,12 @@ export default function WebProjects() {
                 key={`row1-${idx}`}
                 className="relative w-[320px] md:w-[480px] h-[200px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 border border-white/10 bg-white/5"
               >
-                <img
+                <Image
                   src={src}
-                  alt={`Project image ${idx}`}
-                  className="w-full h-full object-cover object-top"
+                  alt={`Project image ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 320px, 480px"
+                  className="object-cover object-top"
                 />
               </div>
             ))}
@@ -82,10 +85,12 @@ export default function WebProjects() {
                 key={`row2-${idx}`}
                 className="relative w-[320px] md:w-[480px] h-[200px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 border border-white/10 bg-white/5"
               >
-                <img
+                <Image
                   src={src}
-                  alt={`Project image ${idx}`}
-                  className="w-full h-full object-cover object-top"
+                  alt={`Project image ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 320px, 480px"
+                  className="object-cover object-top"
                 />
               </div>
             ))}

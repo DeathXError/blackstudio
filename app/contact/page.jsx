@@ -4,6 +4,15 @@ import ContactCards from "./_components/contact-cards";
 import Form from "./_components/form";
 import { StaggerContainer, FadeUp } from "./_components/motion-wrappers";
 
+export const metadata = {
+  title: "Contact",
+  description:
+    "Contact Blackstudio to discuss video editing, website builds, design support, or launch content for your next project.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#020403] text-white">
