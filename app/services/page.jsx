@@ -3,7 +3,14 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { services } from "@/constants/services";
-import { ArrowRight, Clapperboard, FilePenLine, MonitorSmartphone, Palette } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Clapperboard,
+  FilePenLine,
+  MonitorSmartphone,
+  Palette,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -35,12 +42,39 @@ const serviceLinks = {
   "Content Creation": "/work#youtube-showcase",
 };
 
-const serviceHighlights = [
-  "Sharper hooks and cleaner pacing for launch-driven content.",
-  "Faster websites and landing pages that feel polished on every screen.",
-  "Visual systems that hold together across campaigns and social.",
-  "Content ideas and scripting built around what needs to ship next.",
-];
+const serviceMedia = {
+  "Video Editing": {
+    src: "/services/video-editing.png",
+    alt: "Video editing service preview",
+    eyebrow: "Reels and edits",
+    line: "Hooks, cuts, rhythm",
+  },
+  "Web Development": {
+    src: "/services/web-dev.png",
+    alt: "Web development service preview",
+    eyebrow: "Sites and landing pages",
+    line: "Fast, clear, conversion-ready",
+  },
+  "Graphic Design": {
+    src: "/services/graphic-designing.png",
+    alt: "Graphic design service preview",
+    eyebrow: "Campaign and brand visuals",
+    line: "Systems that stay consistent",
+  },
+  "Content Creation": {
+    src: "/services/content-writing.png",
+    alt: "Content creation service preview",
+    eyebrow: "Ideas and scripting",
+    line: "Planning that moves with launch",
+  },
+};
+
+const serviceTags = {
+  "Video Editing": ["Short-form", "Launch films"],
+  "Web Development": ["Landing pages", "Product sites"],
+  "Graphic Design": ["Brand assets", "Social systems"],
+  "Content Creation": ["Hooks", "Production plans"],
+};
 
 export default function ServicesPage() {
   return (
@@ -65,7 +99,7 @@ export default function ServicesPage() {
             <h1 className="mt-8 text-4xl font-bold leading-[1.04] tracking-normal text-white sm:text-5xl lg:text-6xl">
               Services That Move Brands From Idea to Launch.
             </h1>
-            <p className="mx-auto mt-6 max-w-[720px] text-lg leading-9 text-white/58 sm:text-xl">
+            <p className="mx-auto mt-6 max-w-[660px] text-base leading-8 text-white/56 sm:text-lg sm:leading-9">
               We bring editing, websites, design, and content into one sharper
               workflow so the output feels consistent, fast, and ready to ship.
             </p>
@@ -73,76 +107,79 @@ export default function ServicesPage() {
 
           <motion.div
             variants={stagger}
-            className="mt-16 grid gap-5 lg:grid-cols-[0.85fr_1.15fr]"
+            className="mt-16 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
           >
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-between rounded-lg border border-white/10 bg-white/[0.035] p-7 sm:p-8"
-            >
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.08em] text-brand-accent">
-                  What we do
-                </p>
-                <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">
-                  One team for the work your launch usually splits across too many people.
-                </h2>
-              </div>
+            {services.map((service, index) => {
+              const Icon = serviceIcons[service.title] || MonitorSmartphone;
+              const href = serviceLinks[service.title] || "/work";
+              const media = serviceMedia[service.title];
+              const tags = serviceTags[service.title] || [];
 
-              <div className="mt-10 space-y-4">
-                {serviceHighlights.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-lg border border-white/8 bg-black/30 px-4 py-4 text-sm leading-7 text-white/62 sm:text-base"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+              return (
+                <motion.article
+                  key={service.title}
+                  variants={fadeUp}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/5"
+                >
+                  <Link href={href} className="block no-underline">
+                    <div className="relative aspect-4/5 overflow-hidden bg-black">
+                      <Image
+                        src={media.src}
+                        alt={media.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.68))]" />
 
-            <motion.div
-              variants={stagger}
-              className="grid gap-5 sm:grid-cols-2"
-            >
-              {services.map((service, index) => {
-                const Icon = serviceIcons[service.title] || MonitorSmartphone;
-                const href = serviceLinks[service.title] || "/work";
+                      <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-4">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/12 bg-black/35 text-brand-accent backdrop-blur-sm">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <span className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs font-semibold text-white/72 backdrop-blur-sm">
+                          0{index + 1}
+                        </span>
+                      </div>
 
-                return (
-                  <motion.article
-                    key={service.title}
-                    variants={fadeUp}
-                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                    className="group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/5 sm:p-7"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-black/35 text-brand-accent">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white/24">
-                        0{index + 1}
-                      </span>
+                      <div className="absolute inset-x-0 bottom-0 p-5">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/58">
+                          {media.eyebrow}
+                        </p>
+                        <h3 className="mt-2 text-2xl font-bold tracking-normal text-white">
+                          {service.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-7 text-white/74">
+                          {media.line}
+                        </p>
+                      </div>
                     </div>
 
-                    <h3 className="mt-8 text-2xl font-bold tracking-normal text-white">
-                      {service.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-white/56 sm:text-base sm:leading-8">
-                      {service.description}
-                    </p>
+                    <div className="px-5 pb-5 pt-4">
+                      <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-semibold text-white/58"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
 
-                    <Link
-                      href={href}
-                      className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-accent transition-colors duration-300 group-hover:text-white"
-                    >
-                      See related work
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </motion.article>
-                );
-              })}
-            </motion.div>
+                      <p className="mt-4 text-sm leading-7 text-white/54">
+                        {service.description}
+                      </p>
+
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-accent transition-colors duration-300 group-hover:text-white">
+                        See related work
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
+                </motion.article>
+              );
+            })}
           </motion.div>
         </section>
 
@@ -157,7 +194,8 @@ export default function ServicesPage() {
                 How it fits
               </p>
               <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">
-                The work stays more consistent when the creative decisions live under one roof.
+                The work stays more consistent when the creative decisions live
+                under one roof.
               </h2>
             </div>
 
