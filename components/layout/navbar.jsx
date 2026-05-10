@@ -45,7 +45,7 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="hidden items-center gap-14 justify-self-center md:flex">
+        <div className="hidden items-center gap-6 lg:gap-10 justify-self-center md:flex">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
             return (

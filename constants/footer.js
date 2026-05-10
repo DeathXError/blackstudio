@@ -1,8 +1,8 @@
 export const serviceLinks = [
-    { label: "Video Editing", path: "#about" },
-    { label: "Web Development", path: "#about" },
-    { label: "Brand Design", path: "#about" },
-    { label: "Content Systems", path: "#about" },
+    { label: "Video Editing", path: "/work#reels-showcase" },
+    { label: "Web Development", path: "/work#web-projects-showcase" },
+    { label: "Brand Design", path: "/work#reels-showcase" },
+    { label: "Content Writing", path: "/work#youtube-showcase" },
 ];
 
 export const InstagramIcon = ({ className = "" }) => (

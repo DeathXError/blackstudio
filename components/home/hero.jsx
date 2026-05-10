@@ -1,6 +1,5 @@
 "use client";
 import { ParticleCanvas } from "../ui/particle-canvas";
-import { services } from "@/constants/services";
 import { stats } from "@/constants/stats";
 import { useEffect, useState } from "react";
 import RollingText from "../ui/rolling-text";
@@ -8,6 +7,13 @@ import Link from "next/link";
 
 export default function Hero() {
   const [activeWord, setActiveWord] = useState(0);
+
+  const services = [
+    "Video Editing",
+    "Web Development",
+    "Brand Designing",
+    "Content Writing",
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {

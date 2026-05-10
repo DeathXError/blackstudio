@@ -22,7 +22,10 @@ export default function WebProjects() {
   const duplicatedRow2 = [...row2, ...row2];
 
   return (
-    <section id="work" className="w-full py-24 overflow-hidden relative z-10">
+    <section
+      id="web-projects-showcase"
+      className="relative z-10 w-full overflow-hidden py-24 scroll-mt-32"
+    >
       <div className="px-2 mx-auto max-w-[760px] text-center">
       <h2 className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl">
         Featured Web Projects

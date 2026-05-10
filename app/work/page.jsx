@@ -455,7 +455,7 @@ export default function WorkPage() {
         </section>
 
         {/* Reels */}
-        <section className="mx-auto mt-24 max-w-[1180px]">
+        <section id="reels-showcase" className="mx-auto mt-24 max-w-[1180px] scroll-mt-32">
           <SectionHeading
             label="Section 01"
             title="Reels"
@@ -481,7 +481,7 @@ export default function WorkPage() {
         </section>
 
         {/* Youtube Videos */}
-        <section className="mx-auto mt-24 max-w-[1180px]">
+        <section id="youtube-showcase" className="mx-auto mt-24 max-w-[1180px] scroll-mt-32">
           <SectionHeading
             label="Section 02"
             title="YouTube videos"
