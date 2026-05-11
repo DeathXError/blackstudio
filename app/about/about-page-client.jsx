@@ -3,10 +3,10 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { ArrowRight, Check, X } from "lucide-react";
-import { animate, motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import WhatWeDo from "./_component/what-we-do";
+import { CountNumber } from "@/components/ui/count-number";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -40,34 +40,6 @@ const stats = [
   },
 ];
 
-function CountNumber({ value, suffix = "" }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) {
-      return undefined;
-    }
-
-    const controls = animate(0, value, {
-      duration: 1.1,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate(latest) {
-        setDisplayValue(Math.round(latest));
-      },
-    });
-
-    return () => controls.stop();
-  }, [isInView, value]);
-
-  return (
-    <span ref={ref}>
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
 
 const whyUsLeft = [
   "Disconnected freelancers and uneven creative quality",

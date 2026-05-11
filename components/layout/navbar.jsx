@@ -36,11 +36,11 @@ const Navbar = () => {
           className="inline-flex items-center gap-2 justify-self-start text-[1.1rem] font-bold tracking-normal text-white no-underline transition-opacity duration-200 hover:opacity-80"
         >
           <Image
-            src="/logo.png"
+            src="/logo1.png"
             alt="BlackStudio"
-            width={128}
-            height={128}
-            className="rounded-full"
+            width={124}
+            height={124}
+            className="p-1.5 bg-transparent"
             priority
           />
         </Link>

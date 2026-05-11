@@ -11,7 +11,7 @@ const workItems = [
     title: "Web Development",
     label: "Web",
     image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+      "https://i.pinimg.com/1200x/ce/4f/a5/ce4fa53333e13eac6f790109aa95ba4d.jpg",
   },
   {
     title: "Brand Designing and Content Writing",

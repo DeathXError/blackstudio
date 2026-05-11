@@ -4,6 +4,7 @@ import { stats } from "@/constants/stats";
 import { useEffect, useState } from "react";
 import RollingText from "../ui/rolling-text";
 import Link from "next/link";
+import { CountNumber } from "../ui/count-number";
 
 export default function Hero() {
   const [activeWord, setActiveWord] = useState(0);
@@ -100,7 +101,7 @@ export default function Hero() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="text-3xl font-bold tracking-normal text-white sm:text-4xl">
-                    {stat.value}
+                    <CountNumber value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="mt-2 text-xs font-semibold uppercase tracking-normal text-white/52">
                     {stat.label}

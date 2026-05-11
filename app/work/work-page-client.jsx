@@ -2,14 +2,22 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import Image from "next/image";
-import { Eye, Heart, MessageCircle, Play, Volume2, VolumeX } from "lucide-react";
+import {
+  Eye,
+  Heart,
+  MessageCircle,
+  Play,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 import { memo, useRef, useState } from "react";
 import WebProjects from "./_components/web-projects";
 
 const reelData = [
   {
     url: "https://www.instagram.com/reel/DOqItYGEtyO/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483179/1_a6qnsj.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483179/1_a6qnsj.mp4",
     username: "drnehagupta17",
     profilePic: "/profile-pic/1.jpg",
     meta: "Original audio",
@@ -19,7 +27,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DNPrcPROAtp/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto,f_auto,so_2/v1778483179/2_fu6e1e.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto,f_auto,so_2/v1778483179/2_fu6e1e.mp4",
     username: "armaanmalik",
     profilePic: "/profile-pic/2.jpg",
     meta: "Live performance",
@@ -29,7 +38,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DJBZ0BbIV7Z/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483189/3_txzxya.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483189/3_txzxya.mp4",
     username: "dr.mananvora",
     profilePic: "/profile-pic/3.jpg",
     meta: "Brand breakdown",
@@ -39,7 +49,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DTkDC-jCHAE/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483179/4_rsgmct.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483179/4_rsgmct.mp4",
     username: "thebarbank",
     profilePic: "/profile-pic/4.jpg",
     meta: "Original audio",
@@ -49,7 +60,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DTSedfOCEBW/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483186/5_n63igd.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483186/5_n63igd.mp4",
     username: "thebarstockexchangeofficial",
     profilePic: "/profile-pic/5.jpg",
     meta: "Campaign edit",
@@ -59,7 +71,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DU0L__bkvHh/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483195/6_ms5ltg.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483195/6_ms5ltg.mp4",
     username: "drnehagupta17",
     profilePic: "/profile-pic/1.jpg",
     meta: "Original audio",
@@ -69,7 +82,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DXLm4FRiZEZ/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483197/7_b85efv.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483197/7_b85efv.mp4",
     username: "shreya_rao_k",
     profilePic: "/profile-pic/7.jpg",
     meta: "Content reel",
@@ -79,7 +93,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DFdG6n0I7Ql/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483194/8_irw0fy.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483194/8_irw0fy.mp4",
     username: "dr.gaurav.gangwani",
     profilePic: "/profile-pic/8.jpg",
     meta: "Original audio",
@@ -89,7 +104,8 @@ const reelData = [
   },
   {
     url: "https://www.instagram.com/reel/DNiVJyKB8Gc/",
-    videoUrl: "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483191/9_fmwycm.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483191/9_fmwycm.mp4",
     username: "ncpamumbai",
     profilePic: "/profile-pic/9.jpg",
     meta: "Short-form cut",
@@ -111,12 +127,14 @@ function getYoutubeEmbedUrl(url) {
   return `https://www.youtube.com/embed/${videoId}?rel=0`;
 }
 
-const reels = reelData.map(({ url, videoUrl, username, profilePic, meta, reach, likes, comments }) => ({
-  url,
-  videoUrl,
-  profile: { username, profilePic, meta },
-  stats: { reach, likes, comments },
-}));
+const reels = reelData.map(
+  ({ url, videoUrl, username, profilePic, meta, reach, likes, comments }) => ({
+    url,
+    videoUrl,
+    profile: { username, profilePic, meta },
+    stats: { reach, likes, comments },
+  }),
+);
 
 const youtubeVideos = youtubeUrls.map((url, index) => ({
   embedUrl: getYoutubeEmbedUrl(url),
@@ -136,9 +154,16 @@ const SectionHeading = memo(function SectionHeading({ title, description }) {
   );
 });
 
-const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, stats }) {
+const InstagramEmbed = memo(function InstagramEmbed({
+  url,
+  videoUrl,
+  profile,
+  stats,
+}) {
   const avatarLabel = profile?.username?.slice(0, 2).toUpperCase() || "IG";
-  const [showProfileImage, setShowProfileImage] = useState(Boolean(profile?.profilePic));
+  const [showProfileImage, setShowProfileImage] = useState(
+    Boolean(profile?.profilePic),
+  );
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -163,7 +188,7 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
   };
 
   return (
-    <div className="group w-full max-w-[420px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
+    <div className="group w-full max-w-[340px] rounded-xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/18">
       {profile && (
         <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))] px-4 py-3">
           <div className="flex min-w-0 items-center gap-3">
@@ -207,7 +232,7 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
       )}
 
       <div
-        className="relative aspect-9/16 w-full overflow-hidden bg-[#070908] flex items-center justify-center group/video cursor-pointer"
+        className="relative aspect-7/12 w-full overflow-hidden bg-[#070908] flex items-center justify-center group/video cursor-pointer"
         onClick={togglePlay}
       >
         <video
@@ -216,13 +241,15 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
           playsInline
           loop
           muted={isMuted}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />
 
         {/* Play/Pause Overlay — always visible when paused */}
-        <div className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100 bg-black/20"}`}>
+        <div
+          className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100 bg-black/20"}`}
+        >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md">
             <Play className="h-6 w-6 ml-1" fill="currentColor" />
           </div>
@@ -232,7 +259,11 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
           onClick={toggleMute}
           className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md opacity-0 transition-opacity duration-300 group-hover/video:opacity-100 hover:bg-black/60"
         >
-          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+          {isMuted ? (
+            <VolumeX className="h-4 w-4" />
+          ) : (
+            <Volume2 className="h-4 w-4" />
+          )}
         </button>
       </div>
 
@@ -244,9 +275,13 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500/20 text-blue-500/70">
                   <Eye className="h-3.5 w-3.5" />
                 </span>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/70">Reach</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/70">
+                  Reach
+                </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">{stats.reach}</p>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.reach}
+              </p>
             </div>
 
             <div className="rounded-lg border border-white/8 bg-white/3 px-3 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
@@ -254,19 +289,27 @@ const InstagramEmbed = memo(function InstagramEmbed({ url, videoUrl, profile, st
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
                   <Heart className="h-3.5 w-3.5" />
                 </span>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">Likes</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">
+                  Likes
+                </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">{stats.likes}</p>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.likes}
+              </p>
             </div>
 
             <div className="rounded-lg border border-white/8 bg-white/3 px-2 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
               <div className="flex items-center gap-1 text-white/72">
-                <span className="flex px-2 h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
+                <span className="flex px-1 h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
                   <MessageCircle className="h-3.5 w-3.5" />
                 </span>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/42">Comments</p>
+                <p className="text-[9px] font-semibold uppercase tracking-[0.08em] text-white/42">
+                  Comments
+                </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">{stats.comments}</p>
+              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+                {stats.comments}
+              </p>
             </div>
           </div>
         </div>
@@ -307,16 +350,20 @@ export default function WorkPage() {
             Showcasing our best work
           </h1>
           <p className="mx-auto mt-6 max-w-[700px] text-lg leading-9 text-white/58 sm:text-xl">
-            A selection of short-form edits and other works that we are proud of.
+            A selection of short-form edits and other works that we are proud
+            of.
           </p>
         </section>
 
-        <section id="reels-showcase" className="mx-auto mt-24 max-w-[1180px] scroll-mt-32">
+        <section
+          id="reels-showcase"
+          className="mx-auto mt-24 max-w-[1180px] scroll-mt-32"
+        >
           <SectionHeading
             title="Reels"
             description="Short-form edits built for stronger hooks, sharper pacing, and a cleaner brand feel."
           />
-          <div className="mt-10 grid items-start justify-items-center gap-8 md:grid-cols-2 md:gap-10 xl:grid-cols-3">
+          <div className="mt-10 grid items-start justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3">
             {reels.map((reel) => (
               <div key={reel.url} className="flex w-full justify-center">
                 <InstagramEmbed
@@ -330,14 +377,21 @@ export default function WorkPage() {
           </div>
         </section>
 
-        <section id="youtube-showcase" className="mx-auto mt-24 max-w-[1180px] scroll-mt-32">
+        <section
+          id="youtube-showcase"
+          className="mx-auto mt-24 max-w-[1180px] scroll-mt-32"
+        >
           <SectionHeading
             title="YouTube videos"
             description="Longer edits with more room for story, structure, and measured pacing."
           />
           <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-10">
             {youtubeVideos.map((video) => (
-              <YoutubeEmbed key={video.embedUrl} embedUrl={video.embedUrl} title={video.title} />
+              <YoutubeEmbed
+                key={video.embedUrl}
+                embedUrl={video.embedUrl}
+                title={video.title}
+              />
             ))}
           </div>
         </section>
