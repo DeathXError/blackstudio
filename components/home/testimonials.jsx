@@ -23,37 +23,48 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <article
               key={testimonial.name}
-              className={`p-6 md:px-7 md:py-5 rounded-lg border border-white/10 bg-white/[0.035] transition-colors duration-200 hover:border-brand-accent/35 hover:bg-white/5.5 h-fit min-h-60`}
+              className="flex h-full min-h-[360px] flex-col rounded-lg border border-white/10 bg-white/[0.035] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/30 hover:bg-white/5 md:px-7 md:py-6"
             >
-              <div className="flex gap-1 text-brand-accent">
-                {Array.from({ length: 5 }).map((_, starIndex) => (
-                  <Star
-                    key={starIndex}
-                    className="h-5 w-5 fill-current"
-                    aria-hidden="true"
-                  />
-                ))}
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex gap-1 text-brand-accent">
+                  {Array.from({ length: 5 }).map((_, starIndex) => (
+                    <Star
+                      key={starIndex}
+                      className={`h-5 w-5 fill-current ${
+                        starIndex < testimonial.star
+                          ? "text-brand-accent"
+                          : "text-white/34"
+                      }`}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/34">
+                  0{index + 1}
+                </span>
               </div>
 
               <p className="mt-5 min-h-20 text-md font-medium leading-7 text-white/77">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
 
-              <div className="mt-5 flex items-center gap-4">
-                <Image
-                  src={testimonial.image}
-                  alt=""
-                  width={56}
-                  height={56}
-                  className="h-12 w-12 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-md font-semibold text-white">
-                    {testimonial.name}
-                  </h3>
-                  <p className="mt-1 text-sm font-medium text-white/52">
-                    {testimonial.role}
-                  </p>
+              <div className="mt-6 border-t border-white/8 pt-5">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={56}
+                    height={56}
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">
+                      {testimonial.name}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-white/52">
+                      {testimonial.role}
+                    </p>
+                  </div>
                 </div>
               </div>
             </article>
