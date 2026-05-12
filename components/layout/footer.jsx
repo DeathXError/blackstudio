@@ -21,7 +21,7 @@ const Footer = () => {
               className="inline-flex items-center gap-3 no-underline transition-opacity duration-300 hover:opacity-80"
             >
               <Image
-                src="/logo.png"
+                src="/logo1.png"
                 alt=""
                 width={136}
                 height={136}

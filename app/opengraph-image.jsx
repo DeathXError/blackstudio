@@ -14,7 +14,7 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  const logoBuffer = await readFile(join(process.cwd(), "public/logo.png"));
+  const logoBuffer = await readFile(join(process.cwd(), "public/logo1.png"));
   const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
   return new ImageResponse(
