@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import WebProjects from "./_components/web-projects";
+import BeforeAndAfter from "./_components/before-vs-after";
 
 const reelData = [
   {
@@ -36,17 +37,17 @@ const reelData = [
     likes: "68.3K",
     comments: "514",
   },
-  {
-    url: "https://www.instagram.com/reel/DJBZ0BbIV7Z/",
-    videoUrl:
-      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483189/3_txzxya.mp4",
-    username: "dr.mananvora",
-    profilePic: "/profile-pic/3.jpg",
-    meta: "Brand breakdown",
-    reach: "1.7M",
-    likes: "60.9K",
-    comments: "676",
-  },
+  // {
+  //   url: "https://www.instagram.com/reel/DJBZ0BbIV7Z/",
+  //   videoUrl:
+  //     "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483189/3_txzxya.mp4",
+  //   username: "dr.mananvora",
+  //   profilePic: "/profile-pic/3.jpg",
+  //   meta: "Brand breakdown",
+  //   reach: "1.7M",
+  //   likes: "60.9K",
+  //   comments: "676",
+  // },
   {
     url: "https://www.instagram.com/reel/DTkDC-jCHAE/",
     videoUrl:
@@ -91,28 +92,28 @@ const reelData = [
     likes: "483",
     comments: "5",
   },
-  {
-    url: "https://www.instagram.com/reel/DFdG6n0I7Ql/",
-    videoUrl:
-      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483194/8_irw0fy.mp4",
-    username: "dr.gaurav.gangwani",
-    profilePic: "/profile-pic/8.jpg",
-    meta: "Original audio",
-    reach: "18k",
-    likes: "432",
-    comments: "22",
-  },
-  {
-    url: "https://www.instagram.com/reel/DNiVJyKB8Gc/",
-    videoUrl:
-      "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483191/9_fmwycm.mp4",
-    username: "ncpamumbai",
-    profilePic: "/profile-pic/9.jpg",
-    meta: "Short-form cut",
-    reach: "4k",
-    likes: "63",
-    comments: "5",
-  },
+  // {
+  //   url: "https://www.instagram.com/reel/DFdG6n0I7Ql/",
+  //   videoUrl:
+  //     "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483194/8_irw0fy.mp4",
+  //   username: "dr.gaurav.gangwani",
+  //   profilePic: "/profile-pic/8.jpg",
+  //   meta: "Original audio",
+  //   reach: "18k",
+  //   likes: "432",
+  //   comments: "22",
+  // },
+  // {
+  //   url: "https://www.instagram.com/reel/DNiVJyKB8Gc/",
+  //   videoUrl:
+  //     "https://res.cloudinary.com/dhajqibnu/video/upload/q_auto/f_auto/v1778483191/9_fmwycm.mp4",
+  //   username: "ncpamumbai",
+  //   profilePic: "/profile-pic/9.jpg",
+  //   meta: "Short-form cut",
+  //   reach: "4k",
+  //   likes: "63",
+  //   comments: "5",
+  // },
 ];
 
 const youtubeUrls = [
@@ -375,6 +376,17 @@ export default function WorkPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section
+          id="before-and-after"
+          className="mx-auto mt-24 max-w-[1180px] scroll-mt-32"
+        >
+          <SectionHeading
+            title="Before & After Edits"
+            description="A side-by-side comparison of the original footage and the final edited version to showcase the transformation."
+          />
+          <BeforeAndAfter />
         </section>
 
         <section
