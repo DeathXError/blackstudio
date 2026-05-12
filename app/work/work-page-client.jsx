@@ -269,10 +269,10 @@ const InstagramEmbed = memo(function InstagramEmbed({
       </div>
 
       {stats && (
-        <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0))] px-3 pb-3 pt-3">
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <div className="rounded-lg border border-white/8 bg-blue-500/10 px-3 py-1 transition-all duration-300 group-hover:border-blue-500/12 group-hover:bg-blue-500/12">
-              <div className="flex items-center gap-2 text-white/72">
+        <div className="border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0))] px-2 pb-3 pt-3">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-lg border border-white/8 bg-blue-500/10 px-1 py-1 transition-all duration-300 group-hover:border-blue-500/12 group-hover:bg-blue-500/12">
+              <div className="flex items-center gap-1.5 text-white/72">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500/20 text-blue-500/70">
                   <Eye className="h-3.5 w-3.5" />
                 </span>
@@ -280,13 +280,13 @@ const InstagramEmbed = memo(function InstagramEmbed({
                   Reach
                 </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+              <p className="mt-1 ml-1 text-lg font-bold tracking-normal text-white sm:text-xl">
                 {stats.reach}
               </p>
             </div>
 
-            <div className="rounded-lg border border-white/8 bg-white/3 px-3 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
-              <div className="flex items-center gap-2 text-white/72">
+            <div className="rounded-lg border border-white/8 bg-white/3 px-1 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
+              <div className="flex items-center gap-1.5 text-white/72">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
                   <Heart className="h-3.5 w-3.5" />
                 </span>
@@ -294,13 +294,13 @@ const InstagramEmbed = memo(function InstagramEmbed({
                   Likes
                 </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+              <p className="mt-1 ml-1 text-lg font-bold tracking-normal text-white sm:text-xl">
                 {stats.likes}
               </p>
             </div>
 
-            <div className="rounded-lg border border-white/8 bg-white/3 px-2 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
-              <div className="flex items-center gap-1 text-white/72">
+            <div className="rounded-lg border border-white/8 bg-white/3 px-1 py-1 transition-all duration-300 group-hover:border-white/12 group-hover:bg-white/4.5">
+              <div className="flex items-center gap-0.5 text-white/72">
                 <span className="flex px-1 h-7 w-7 items-center justify-center rounded-full bg-brand-accent/12 text-brand-accent">
                   <MessageCircle className="h-3.5 w-3.5" />
                 </span>
@@ -308,7 +308,7 @@ const InstagramEmbed = memo(function InstagramEmbed({
                   Comments
                 </p>
               </div>
-              <p className="mt-1 text-lg font-bold tracking-normal text-white sm:text-xl">
+              <p className="mt-1 ml-1 text-lg font-bold tracking-normal text-white sm:text-xl">
                 {stats.comments}
               </p>
             </div>
